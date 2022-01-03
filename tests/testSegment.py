@@ -2,6 +2,7 @@
 
 import unittest
 
+
 from model.Segment import *
 from model.Constantes import *
 
