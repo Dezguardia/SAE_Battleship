@@ -1,0 +1,5 @@
+# Exclure les fichiers : 
+.idea/
+__pycache__
+venv/
+
