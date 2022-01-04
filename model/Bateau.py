@@ -9,7 +9,7 @@
 #
 
 from model.Segment import type_segment, construireSegment
-from model.Coordonnees import type_coordonnees
+from model.Coordonnees import type_coordonnees, sontVoisins
 from model.Constantes import *
 
 
@@ -181,6 +181,46 @@ def peutPlacerBateau(bateau:dict,first_case:tuple,pos:bool) -> bool :
     else :
         raise ValueError(f"Les coordonnées {first_case} ne se trouvent pas dans la grille")
 
+def estPlaceBateau(bateau:dict) -> bool :
+    """
+    Vérifie si un bateau est placé
+    :param bateau: Dictionnaire représentant le bateau
+    :return: True si le bateau est placé (aucun segment aux coordonnées none), False sinon
+    """
+    if not type_bateau(bateau):
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+    lst_seg=bateau.get(const.BATEAU_SEGMENTS)
+    estPlace=True
+    for i in range(len(lst_seg)) :
+        if lst_seg[i].get(const.SEGMENT_COORDONNEES) == None :
+            estPlace = False
+            break
+    return estPlace
+
+
+def sontVoisinsBateau(bateau1:dict,bateau2:dict) -> bool :
+    """
+    Vérifie si deux bateaux sont voisins en analysant si les coordonnées
+    :param bateau1:
+    :param bateau2:
+    :return:
+    """
+    if not type_bateau(bateau1) or not type_bateau(bateau2) :
+        raise ValueError("Au moins l'un des deux bateaux n'est pas valide")
+
+    res=False
+    taille_1=getTailleBateau(bateau1)
+    taille_2=getTailleBateau(bateau2)
+    lst_seg_1 = bateau1.get(const.BATEAU_SEGMENTS)
+    lst_seg_2 = bateau2.get(const.BATEAU_SEGMENTS)
+    for i in range(taille_1) :
+        seg= lst_seg_1[i].get(const.SEGMENT_COORDONNEES)
+        for j in range(taille_2) :
+            seg2=lst_seg_2[j].get(const.SEGMENT_COORDONNEES)
+            if sontVoisins(seg,seg2) :
+                res = True
+                break
+    return res
 
 
 
