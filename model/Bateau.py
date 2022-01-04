@@ -79,5 +79,57 @@ def getSegmentsBateau(bateau:dict) -> list :
     """
     if not type_bateau(bateau) :
         raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
-    else :
+    else:
         return bateau.get(const.BATEAU_SEGMENTS)
+
+
+def getSegmentBateau(bateau: dict, num: object) -> dict :
+
+    taille = getTailleBateau(bateau)
+    seg = getSegmentsBateau(bateau)
+
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+
+    elif type(num) == int :
+
+        if num < 0 or num >= taille :
+            raise ValueError(f"Le numéro de segment {num} n'est pas valide.")
+
+        else :
+            return seg[num]
+
+    elif type(num) == tuple :
+        valide = False
+        cpt=0
+        for i in range(taille) :
+            if num == seg[i].get(const.SEGMENT_COORDONNEES) :
+                valide = True
+                break
+            cpt+=1
+        if valide :
+            return seg[cpt]
+        else :
+            raise ValueError(f"Les coordonnées {num} ne sont pas valides.")
+    else :
+        raise ValueError(f"Le type du second paramètre {type(num)} ne correspond pas")
+
+def setSegmentBateau(bateau:dict,num:int,segment:dict) -> None :
+
+    taille = getTailleBateau(bateau)
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+    elif num < 0 or num >= taille:
+        raise ValueError(f"Le numéro de segment {num} n'est pas valide.")
+    elif not type_segment(segment) :
+        raise ValueError(f"L'objet {segment} passé en paramètre n'est pas un segment.")
+    else:
+        seg_list = getSegmentsBateau(bateau)
+        seg_list[num] = segment
+
+
+
+
+
+
+
