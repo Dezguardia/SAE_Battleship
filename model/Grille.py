@@ -32,4 +32,15 @@ def type_grille(g: list) -> bool:
             i += 1
     return res
 
-
+def construireGrille() -> list :
+    """
+    Crée une grille de taille const.DIM x const.DIM
+    :return: Retourne la grille
+    """
+    grille=[]
+    for i in range(const.DIM) :
+        row=[]
+        for j in range(const.DIM) :
+            row.append(None)
+        grille.append(row)
+    return grille
