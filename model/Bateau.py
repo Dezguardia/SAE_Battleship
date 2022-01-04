@@ -9,6 +9,7 @@
 #
 
 from model.Segment import type_segment, construireSegment
+from model.Coordonnees import type_coordonnees
 from model.Constantes import *
 
 
@@ -158,6 +159,27 @@ def getCoordonneesBateau(bateau:dict) -> list :
         return coord_list
 
 
+#-----------------PLACER LES BATEAUX------------------#
+
+def peutPlacerBateau(bateau:dict,first_case:tuple,pos:bool) -> bool :
+
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+    if not type_coordonnees(first_case) or first_case == None :
+        raise ValueError(f"Les coordonnées {first_case} ne sont pas valides.")
+
+    taille=getTailleBateau(bateau)
+    res = False
+    if first_case[0] <= const.DIM and first_case[1] <= const.DIM:
+        if pos :
+            if first_case[1] + taille <= const.DIM :
+                res = True
+        else :
+            if first_case[0] + taille <= const.DIM :
+                res = True
+        return res
+    else :
+        raise ValueError(f"Les coordonnées {first_case} ne se trouvent pas dans la grille")
 
 
 

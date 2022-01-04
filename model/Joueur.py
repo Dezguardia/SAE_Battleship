@@ -60,21 +60,44 @@ def getNomJoueur(player:dict) -> str :
     return player.get(const.JOUEUR_NOM)
 
 def getNombreBateauxJoueur(player:dict) -> int :
+    """
+    Donne le nombre de bateaux d'un joueur
+    :param player: Le dictionnaire du joueur
+    :return: Int du nombre de bateaux
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return len(player.get(const.JOUEUR_LISTE_BATEAUX))
 
 def getBateauxJoueur(player:dict) -> list :
+    """
+    Donne la liste des bateaux du joueur
+    :param player: dictionnaire représentant le joueur
+    :return: Liste des bateaux
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_LISTE_BATEAUX)
 
 def getGrilleTirsJoueur(player:dict) -> list :
+    """
+    Donne la grille des tirs du joueur
+    :param player: dictionnaire du joueur
+    :return: la grille du joueur
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_GRILLE_TIRS)
 
 def getGrilleTirsAdversaire(player:dict) -> list :
+    """
+    Donne la grille des tirs de l'adversaire
+    :param player: dictionnaire du joueur
+    :return: la grille de l'adversaire
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
+
+
+
