@@ -63,3 +63,10 @@ def getNombreBateauxJoueur(player:dict) -> int :
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return len(player.get(const.JOUEUR_LISTE_BATEAUX))
+
+def getBateauxJoueur(player:dict) -> list :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    return player.get(const.JOUEUR_LISTE_BATEAUX)
+
+def
