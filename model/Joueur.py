@@ -29,6 +29,13 @@ def type_joueur(joueur: dict) -> bool:
         and all(type_bateau(v) for v in joueur[const.JOUEUR_LISTE_BATEAUX])
 
 def construireJoueur(nom: str,lst: list) -> dict :
+    """
+    Construction d'un joueur à partir d'un nom et d'une liste de noms de bateaux
+    Le programme crée une liste de bateaux à partir de leur nom
+    :param nom: Nom du joueur
+    :param lst: Liste des noms des bateaux
+    :return: Retourne un joueur représenté par un dictionnaire
+    """
 
     playerGrid = construireGrille()
     advGrid = construireGrille()
@@ -42,3 +49,7 @@ def construireJoueur(nom: str,lst: list) -> dict :
               const.JOUEUR_GRILLE_ADVERSAIRE: advGrid}
     return player
 
+def getNomJoueur(player:dict) -> str :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    return player.get(const.JOUEUR_NOM)

@@ -103,7 +103,7 @@ def getSegmentBateau(bateau: dict, num: object) -> dict :
         if num < 0 or num >= taille :
             raise ValueError(f"Le numéro de segment {num} n'est pas valide.")
 
-        else :
+        else:
             return seg[num]
 
     elif type(num) == tuple :
