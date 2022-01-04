@@ -69,4 +69,12 @@ def getBateauxJoueur(player:dict) -> list :
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_LISTE_BATEAUX)
 
-def
+def getGrilleTirsJoueur(player:dict) -> list :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    return player.get(const.JOUEUR_GRILLE_TIRS)
+
+def getGrilleTirsAdversaire(player:dict) -> list :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    return player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
