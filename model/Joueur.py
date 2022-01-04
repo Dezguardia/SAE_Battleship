@@ -40,7 +40,7 @@ def construireJoueur(nom: str,lst: list) -> dict :
     playerGrid = construireGrille()
     advGrid = construireGrille()
     lst_bat=[]
-    for i in range(len(lst)) :
+    for i in range(len(lst)):
         lst_bat.append(construireBateau(lst[i]))
 
     player = {const.JOUEUR_NOM: nom,
@@ -50,6 +50,16 @@ def construireJoueur(nom: str,lst: list) -> dict :
     return player
 
 def getNomJoueur(player:dict) -> str :
+    """
+    Retourne le nom d'un joueur
+    :param player: Le dictionnaire représentant le joueur
+    :return: Str du nom du joueur
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_NOM)
+
+def getNombreBateauxJoueur(player:dict) -> int :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    return len(player.get(const.JOUEUR_LISTE_BATEAUX))
