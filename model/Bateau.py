@@ -29,6 +29,12 @@ def type_bateau(bateau: dict) -> bool:
 
 
 def construireBateau(nom: str) -> dict :
+    """
+    Construit un objet bateau à partir de son nom
+    :param nom: Le nom du bateau. S'il se trouve dans les noms valides, lui attribue un nombre de cases et
+    construit autant de segments que ce nombre
+    :return: Retourne un dictionnaire correspondant au bateau
+    """
     if nom not in const.BATEAUX_CASES :
         raise ValueError(f"Le nom {nom} ne correspond pas à un type de bateau.")
     else:
@@ -42,3 +48,36 @@ def construireBateau(nom: str) -> dict :
 
         bateau = {const.BATEAU_NOM : nom, const.BATEAU_SEGMENTS : lst_seg}
         return bateau
+
+def getNomBateau(bateau:dict) -> str :
+    """
+    La fonction retourne le nom du bateau à partir du dictionnaire en paramètre
+    :param bateau: Le dictionnaire représentant le bateau
+    :return: le nom du bateau
+    """
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+    else:
+        return bateau.get(const.BATEAU_NOM)
+
+def getTailleBateau(bateau:dict) -> int :
+    """
+    Donne la taille d'un bateau passé en paramètre
+    :param bateau: Dictionnaire correspondant au bateau
+    :return: Le nombre de segments du bateau
+    """
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+    else :
+        return len(bateau.get(const.BATEAU_SEGMENTS))
+
+def getSegmentsBateau(bateau:dict) -> list :
+    """
+    Donne une liste des segments du bateau
+    :param bateau: Le dictionnaire correspondant au bateau
+    :return: la liste des segments
+    """
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
+    else :
+        return bateau.get(const.BATEAU_SEGMENTS)
