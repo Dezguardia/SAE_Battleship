@@ -22,3 +22,24 @@ def type_coordonnees(c: tuple) -> bool:
     return c is None or (type(c) == tuple and len(c) == 2 and 0 <= c[0] < const.DIM and 0 <= c[1] < const.DIM)
 
 
+def sontVoisins(coord1:tuple,coord2:tuple) -> bool :
+    """
+    Vérifie si deux coordonnées sont voisines en calculant la différence entre les coordonnées x et y
+    :param coord1: Tuple des coordonnées 1
+    :param coord2: Tuple des coordonnées 2
+    :return: True si voisines, False sinon
+    """
+
+    if not type_coordonnees(coord1) or not type_coordonnees(coord2) or coord1 == None or coord2 == None:
+        raise ValueError("Les coordonnées entrées ne sont pas correctes")
+
+    res = False
+
+    if coord1[0] == coord2[0] and coord1[1] == coord2[1]:
+        res = False
+
+    elif (coord1[0] - coord2[0] == 1 or coord1[0] - coord2[0] == -1 or coord1[0] - coord2[0] == 0) \
+            and (coord1[1] - coord2[1] == 1 or coord1[1] - coord2[1] == -1 or coord1[1] - coord2[1] == 0):
+        res = True
+
+    return res

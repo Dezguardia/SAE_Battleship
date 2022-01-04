@@ -170,7 +170,7 @@ def peutPlacerBateau(bateau:dict,first_case:tuple,pos:bool) -> bool :
 
     taille=getTailleBateau(bateau)
     res = False
-    if first_case[0] <= const.DIM and first_case[1] <= const.DIM:
+    if 0 <= first_case[0] <= const.DIM and 0 <= first_case[1] <= const.DIM:
         if pos :
             if first_case[1] + taille <= const.DIM :
                 res = True
