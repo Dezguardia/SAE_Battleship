@@ -84,6 +84,13 @@ def getSegmentsBateau(bateau:dict) -> list :
 
 
 def getSegmentBateau(bateau: dict, num: object) -> dict :
+    """
+    Permet de sélectionner un segment d'un bateau à partir de ses coordonnées ou de sa position
+    dans la liste des segments
+    :param bateau: Le dictionnaire correspondant au bateau
+    :param num: Les coordonnées du segment choisi OU sa position dans la liste des segments
+    :return: Le segment choisi
+    """
 
     taille = getTailleBateau(bateau)
     seg = getSegmentsBateau(bateau)
@@ -115,6 +122,13 @@ def getSegmentBateau(bateau: dict, num: object) -> dict :
         raise ValueError(f"Le type du second paramètre {type(num)} ne correspond pas")
 
 def setSegmentBateau(bateau:dict,num:int,segment:dict) -> None :
+    """
+    Remplace un segment choisi d'un bateau par un segment passé en paramètre
+    :param bateau: Le dictionnaire correspondant au bateau
+    :param num: le numéro du segment dans la liste des segments
+    :param segment: Le segment qui remplacera l'ancien segment
+    :return: Rien
+    """
 
     taille = getTailleBateau(bateau)
     if not type_bateau(bateau) :
@@ -129,6 +143,11 @@ def setSegmentBateau(bateau:dict,num:int,segment:dict) -> None :
 
 
 def getCoordonneesBateau(bateau:dict) -> list :
+    """
+    Crée une liste contenant les coordonnées de tous les segments d'un bateau
+    :param bateau: Le dictionnaire correspondant au bateau
+    :return: La liste des coordonnées
+    """
     if not type_bateau(bateau) :
         raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
     else :
