@@ -1,7 +1,7 @@
 # Joueur.py
 
-from model.Bateau import type_bateau
-from model.Grille import type_grille
+from model.Bateau import type_bateau, construireBateau
+from model.Grille import type_grille, construireGrille
 from model.Constantes import *
 
 #
@@ -28,4 +28,17 @@ def type_joueur(joueur: dict) -> bool:
         and type_grille(joueur[const.JOUEUR_GRILLE_TIRS]) \
         and all(type_bateau(v) for v in joueur[const.JOUEUR_LISTE_BATEAUX])
 
+def construireJoueur(nom: str,lst: list) -> dict :
+
+    playerGrid = construireGrille()
+    advGrid = construireGrille()
+    lst_bat=[]
+    for i in range(len(lst)) :
+        lst_bat.append(construireBateau(lst[i]))
+
+    player = {const.JOUEUR_NOM: nom,
+              const.JOUEUR_LISTE_BATEAUX: lst_bat,
+              const.JOUEUR_GRILLE_TIRS: playerGrid,
+              const.JOUEUR_GRILLE_ADVERSAIRE: advGrid}
+    return player
 
