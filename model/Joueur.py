@@ -133,6 +133,11 @@ def placerBateauJoueur(player:dict,bateau:dict,first_case:tuple,posHorizon:bool)
 #---------------------------------------------#
 
 def reinitialiserBateauxJoueur(player:dict) -> None :
+    """
+    Réinitialise les bateaux d'un joueur
+    :param player:
+    :return:
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     nbr=getNombreBateauxJoueur(player)

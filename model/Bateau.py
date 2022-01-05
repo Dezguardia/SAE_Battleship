@@ -246,6 +246,7 @@ def placerBateau(bateau:dict,first_case:tuple,posHorizon:bool) -> None :
     if not peutPlacerBateau(bateau,first_case,posHorizon) :
         raise RuntimeError("Le bateau ne peut pas être placé à ces coordonnées")
     taille=getTailleBateau(bateau)
+
     if posHorizon :
         for i in range(taille) :
             seg = getSegmentBateau(bateau,i)
@@ -263,6 +264,11 @@ def placerBateau(bateau:dict,first_case:tuple,posHorizon:bool) -> None :
             first_case=tuple(test)
 
 def reinitialiserBateau(bateau:dict) -> None :
+    """
+    Réinitialise les coordonnées et l'état d'un bateau
+    :param bateau: Dictionnaire du bateau
+    :return: None
+    """
     if not type_bateau(bateau) :
         raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
     taille=getTailleBateau(bateau)
@@ -291,3 +297,23 @@ def est_horizontal_bateau(bateau: dict) -> bool:
             if (res and pos[0][0] != pos[i][0]) or (not res and pos[0][1] != pos[i][1]):
                 raise ValueError("est_horizontal_bateau: Le bateau n'est ni horizontal, ni vertical ??")
     return res
+
+def contientSegmentBateau(bateau:dict,case:tuple) -> bool :
+    """
+    Vérifie si un bateau contient une case dont les coordonnées sont données en paramètre
+    :param bateau: Dictionnaire du bateau
+    :param case: Tuple des coordonnées de la case
+    :return: True si le bateau contient la case, False sinon
+    """
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
+    if not type_coordonnees(case) :
+        raise ValueError(f"L'objet {case} ne correspond pas à des coordonnées.")
+    lst_seg=getSegmentsBateau(bateau)
+    estContenu=False
+    for i in range(len(lst_seg)) :
+        if lst_seg[i].get(const.SEGMENT_COORDONNEES) == case :
+            estContenu = True
+            break
+    return estContenu
+
