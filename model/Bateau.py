@@ -162,6 +162,13 @@ def getCoordonneesBateau(bateau:dict) -> list :
 #-----------------PLACER LES BATEAUX------------------#
 
 def peutPlacerBateau(bateau:dict,first_case:tuple,pos:bool) -> bool :
+    """
+    Vérifie si un bateau peut être placé en fonction de ses coordonnées
+    :param bateau: Dictionnaire représentant le bateau
+    :param first_case: Coordonnées de sa première case
+    :param pos: Booléen : si True, le bateau est à l'horizontale, sinon il est à la verticale
+    :return: True si le bateau peut être placé aux coordonnées, False sinon
+    """
 
     if not type_bateau(bateau) :
         raise ValueError(f"L'objet {bateau} passé en paramètre n'est pas un bateau.")
@@ -200,10 +207,10 @@ def estPlaceBateau(bateau:dict) -> bool :
 
 def sontVoisinsBateau(bateau1:dict,bateau2:dict) -> bool :
     """
-    Vérifie si deux bateaux sont voisins en analysant si les coordonnées
-    :param bateau1:
-    :param bateau2:
-    :return:
+    Vérifie si deux bateaux sont voisins en analysant si leurs coordonnées sont adjacentes
+    :param bateau1: Dictionnaire du premier bateau
+    :param bateau2: Dictionnaire du deuxième bateau
+    :return: True si les bateaux sont voisins, False sinon
     """
     if not type_bateau(bateau1) or not type_bateau(bateau2) :
         raise ValueError("Au moins l'un des deux bateaux n'est pas valide")
@@ -224,3 +231,33 @@ def sontVoisinsBateau(bateau1:dict,bateau2:dict) -> bool :
 
 
 
+def placerBateau(bateau:dict,first_case:tuple,posHorizon:bool) -> None :
+    """
+    Vient placer le bateau passé en paramètre à partir de la coordonnée first_case et de son orientation
+    :param bateau: Dictionnaire du bateau
+    :param first_case: Tuple des coordonnées de la première case du bateau
+    :param posHorizon: Bool : si True, le bateau est horizontal, sinon il est vertical
+    :return: None
+    """
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
+    if not type_coordonnees(first_case):
+        raise ValueError(f"Les coordonnées {first_case} ne sont pas valides.")
+    if not peutPlacerBateau(bateau,first_case,posHorizon) :
+        raise RuntimeError("Le bateau ne peut pas être placé à ces coordonnées")
+    taille=getTailleBateau(bateau)
+    if posHorizon :
+        for i in range(taille) :
+            seg = getSegmentBateau(bateau,i)
+            seg[const.SEGMENT_COORDONNEES]=first_case
+            test=list(first_case)
+            test[1]+=1
+            first_case=tuple(test)
+
+    else :
+        for i in range(taille) :
+            seg = getSegmentBateau(bateau,i)
+            seg[const.SEGMENT_COORDONNEES]=first_case
+            test=list(first_case)
+            test[0]+=1
+            first_case=tuple(test)
