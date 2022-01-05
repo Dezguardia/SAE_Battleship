@@ -319,6 +319,13 @@ def contientSegmentBateau(bateau:dict,case:tuple) -> bool :
     return estContenu
 
 def setEtatSegmentBateau(bateau:dict,coord:tuple,etat:str) -> None :
+    """
+    Remplace l'état d'un segment par l'état en paramètre
+    :param bateau: Dictionnaire représentant le bateau
+    :param coord: Coordonnées du segment
+    :param etat: État remplaçant l'état du segment
+    :return: None
+    """
     if not type_bateau(bateau) :
         raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
     if not type_coordonnees(coord) :
@@ -330,6 +337,11 @@ def setEtatSegmentBateau(bateau:dict,coord:tuple,etat:str) -> None :
 
 
 def estCouleBateau(bateau:dict) -> bool :
+    """
+    Vérifie si un bateau est coulé
+    :param bateau: Dictionnaire du bateau
+    :return: True si le bateau est coulé, false sinon
+    """
     if not type_bateau(bateau) :
         raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
     lst_seg=getSegmentsBateau(bateau)

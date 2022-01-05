@@ -1,6 +1,6 @@
 # Joueur.py
 
-from model.Bateau import type_bateau, construireBateau, peutPlacerBateau, sontVoisinsBateau, placerBateau, reinitialiserBateau, getCoordonneesBateau
+from model.Bateau import *
 from model.Grille import type_grille, construireGrille
 from model.Coordonnees import type_coordonnees
 from model.Constantes import *
@@ -113,20 +113,28 @@ def placerBateauJoueur(player:dict,bateau:dict,first_case:tuple,posHorizon:bool)
     if bateau not in getBateauxJoueur(player) :
         raise RuntimeError(f"Le bateau {bateau} ne fait pas partie des bateaux du joueur {player}.")
 
-    lst=getCoordonneesBateau(bateau)
-    for i in range(len(lst)) :
-        if lst[i] == None :
-            return False
+    bateauJoueur = getBateauxJoueur(player)
+    taille = getTailleBateau(bateau)
 
-    valide=True
-    lst_bat=getBateauxJoueur(player)
-    if peutPlacerBateau(bateau,first_case,posHorizon) :
-        for i in range(getNombreBateauxJoueur(player)) :
-            if lst_bat[i] != bateau :
-                if sontVoisinsBateau(bateau,lst_bat[i]) :
+    valide = True
+    if peutPlacerBateau(bateau, first_case, posHorizon) == False:
+        valide = False
+
+    else :
+        bateau2 = bateau.copy()
+        placerBateau(bateau2, first_case, posHorizon)
+
+        for i in range(taille):
+            if getCoordonneesBateau(bateau2) == getCoordonneesBateau(bateauJoueur[i]):
+                return valide
+
+            else:
+                if sontVoisinsBateau(bateau2, bateauJoueur[i]) == True :
                     valide = False
-    if valide :
-        placerBateau(bateau,first_case,posHorizon)
+
+        if valide:
+            placerBateau(bateau, first_case, posHorizon)
+
     return valide
 
 
@@ -143,5 +151,34 @@ def reinitialiserBateauxJoueur(player:dict) -> None :
     nbr=getNombreBateauxJoueur(player)
     for i in range(nbr) :
         reinitialiserBateau(getBateauxJoueur(player)[i])
+
+#---------------------------------------------#
+
+def repondreTirJoueur(player:dict,coord:tuple)-> str :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    if not type_coordonnees(coord) :
+        raise ValueError(f"Les coordonnées {coord} ne sont pas valides.")
+    res=const.RATE
+    lst_bat=getBateauxJoueur(player)
+    for i in range(len(lst_bat)) :
+        bateau=lst_bat[i]
+        lst_seg = getSegmentsBateau(bateau)
+        for j in range(len(lst_seg)) :
+            segment=lst_seg[j]
+            if segment.get(const.SEGMENT_COORDONNEES) == coord :
+                res= const.TOUCHE
+                setEtatSegmentBateau(bateau,coord,const.TOUCHE)
+                if estCouleBateau(bateau) :
+                    res = const.COULE
+    return res
+
+
+
+
+
+
+
+
 
 

@@ -7,14 +7,16 @@ import pygame
 
 from view import window
 from model.Constantes import *
-from model.Joueur import construireJoueur
+from model.Joueur import construireJoueur, repondreTirJoueur
 from model.Manuel import *
 
 def main_test():
     j = construireJoueur("Test", [const.PORTE_AVION, const.CUIRASSE, const.CROISEUR, const.TORPILLEUR])
     # j = construireJoueur("Test", [const.PORTE_AVION, const.CUIRASSE])
     placerBateauManuel(j)
-    choisirCaseTirManuel(j)
+    case=choisirCaseTirManuel(j)
+    repondreTirJoueur(j,case)
+    window.refresh()
     window.set_action("Pour terminer, cliquez dans la grille de DROITE")
     window.get_clicked_cell(2)
 
