@@ -1,7 +1,8 @@
 # Joueur.py
 
-from model.Bateau import type_bateau, construireBateau
+from model.Bateau import type_bateau, construireBateau, peutPlacerBateau, sontVoisinsBateau, placerBateau
 from model.Grille import type_grille, construireGrille
+from model.Coordonnees import type_coordonnees
 from model.Constantes import *
 
 #
@@ -98,6 +99,40 @@ def getGrilleTirsAdversaire(player:dict) -> list :
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
+
+def placerBateauJoueur(player:dict,bateau:dict,first_case:tuple,posHorizon:bool) -> bool :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
+    if not type_coordonnees(first_case):
+        raise ValueError(f"Les coordonnées {first_case} ne sont pas valides.")
+    if bateau not in getBateauxJoueur(player) :
+        raise RuntimeError(f"Le bateau {bateau} ne fait pas partie des bateaux du joueur {player}.")
+
+    valide=False
+
+    nbr=getNombreBateauxJoueur(player)
+    lst_bat = player.get(const.JOUEUR_LISTE_BATEAUX)
+    bateau_test=construireBateau(bateau.get(const.BATEAU_NOM))
+    placerBateau(bateau_test,first_case,posHorizon)
+
+    voisins=False
+    print(nbr)
+    for i in range(nbr) :
+        print(lst_bat[i].get(const.BATEAU_SEGMENTS))
+
+        if sontVoisinsBateau(bateau_test,lst_bat[i]) :
+            voisins = True
+            break
+
+    if peutPlacerBateau(bateau,first_case,posHorizon) and not voisins :
+        placerBateau(bateau,first_case,posHorizon)
+        valide = True
+
+    return valide
+
+
 
 
 

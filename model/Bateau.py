@@ -261,3 +261,13 @@ def placerBateau(bateau:dict,first_case:tuple,posHorizon:bool) -> None :
             test=list(first_case)
             test[0]+=1
             first_case=tuple(test)
+
+def reinitialiserBateau(bateau:dict) -> None :
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
+    taille=getTailleBateau(bateau)
+    lst_seg=bateau.get(const.BATEAU_SEGMENTS)
+    for i in range(taille) :
+        lst_seg[i][const.SEGMENT_COORDONNEES]=None
+        lst_seg[i][const.SEGMENT_ETAT]=const.INTACT
+
