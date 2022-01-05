@@ -327,3 +327,15 @@ def setEtatSegmentBateau(bateau:dict,coord:tuple,etat:str) -> None :
         raise ValueError(f"L'objet {etat} ne correspond pas à un état.")
     seg=getSegmentBateau(bateau,coord)
     setEtatSegment(seg,etat)
+
+
+def estCouleBateau(bateau:dict) -> bool :
+    if not type_bateau(bateau) :
+        raise ValueError(f"L'objet {bateau} n'est pas un bateau valide.")
+    lst_seg=getSegmentsBateau(bateau)
+    estCoule=True
+    for i in range(len(lst_seg)) :
+        segment=lst_seg[i]
+        if segment[const.SEGMENT_ETAT] == const.INTACT :
+            estCoule = False
+    return estCoule
