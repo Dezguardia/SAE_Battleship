@@ -1,6 +1,6 @@
 # Joueur.py
 
-from model.Bateau import type_bateau, construireBateau, peutPlacerBateau, sontVoisinsBateau, placerBateau
+from model.Bateau import type_bateau, construireBateau, peutPlacerBateau, sontVoisinsBateau, placerBateau, reinitialiserBateau, getCoordonneesBateau
 from model.Grille import type_grille, construireGrille
 from model.Coordonnees import type_coordonnees
 from model.Constantes import *
@@ -100,6 +100,9 @@ def getGrilleTirsAdversaire(player:dict) -> list :
         raise ValueError(f"L'objet {player} ne correspond pas ")
     return player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
 
+
+#---------------------------------------------#
+
 def placerBateauJoueur(player:dict,bateau:dict,first_case:tuple,posHorizon:bool) -> bool :
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
@@ -110,29 +113,30 @@ def placerBateauJoueur(player:dict,bateau:dict,first_case:tuple,posHorizon:bool)
     if bateau not in getBateauxJoueur(player) :
         raise RuntimeError(f"Le bateau {bateau} ne fait pas partie des bateaux du joueur {player}.")
 
-    valide=False
+    lst=getCoordonneesBateau(bateau)
+    for i in range(len(lst)) :
+        if lst[i] == None :
+            return False
 
-    nbr=getNombreBateauxJoueur(player)
-    lst_bat = player.get(const.JOUEUR_LISTE_BATEAUX)
-    bateau_test=construireBateau(bateau.get(const.BATEAU_NOM))
-    placerBateau(bateau_test,first_case,posHorizon)
-
-    voisins=False
-    print(nbr)
-    for i in range(nbr) :
-        print(lst_bat[i].get(const.BATEAU_SEGMENTS))
-
-        if sontVoisinsBateau(bateau_test,lst_bat[i]) :
-            voisins = True
-            break
-
-    if peutPlacerBateau(bateau,first_case,posHorizon) and not voisins :
+    valide=True
+    lst_bat=getBateauxJoueur(player)
+    if peutPlacerBateau(bateau,first_case,posHorizon) :
+        for i in range(getNombreBateauxJoueur(player)) :
+            if lst_bat[i] != bateau :
+                if sontVoisinsBateau(bateau,lst_bat[i]) :
+                    valide = False
+    if valide :
         placerBateau(bateau,first_case,posHorizon)
-        valide = True
-
     return valide
 
 
+#---------------------------------------------#
 
+def reinitialiserBateauxJoueur(player:dict) -> None :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    nbr=getNombreBateauxJoueur(player)
+    for i in range(nbr) :
+        reinitialiserBateau(getBateauxJoueur(player)[i])
 
 
