@@ -177,6 +177,8 @@ def repondreTirJoueur(player:dict,coord:tuple)-> str :
             if segment.get(const.SEGMENT_COORDONNEES) == coord :
                 res= const.TOUCHE
                 setEtatSegmentBateau(bateau,coord,const.TOUCHE)
+                grille = player[const.JOUEUR_GRILLE_ADVERSAIRE]
+                grille[coord[0]][coord[1]] = const.TOUCHE
                 if estCouleBateau(bateau) :
                     res = const.COULE
     if res == const.COULE :
