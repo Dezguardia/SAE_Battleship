@@ -4,7 +4,6 @@ from model.Bateau import *
 from model.Grille import type_grille, construireGrille, marquerCouleGrille
 from model.Coordonnees import type_coordonnees
 from model.Constantes import *
-from view.BattleCanvas import *
 
 #
 # Un joueur est représenté par un dictionnaire contenant les couples (clé, valeur) suivants :
@@ -157,6 +156,13 @@ def reinitialiserBateauxJoueur(player:dict) -> None :
 
 
 def repondreTirJoueur(player:dict,coord:tuple)-> str :
+    """
+    Retourne l'état de la case choisie par l'utilisateur après qu'il ait cliqué dessus
+    Appelle marquerCouleGrille pour marquer toutes les cases d'un bateau coulé comme coulées
+    :param player: Dictionnaire du joueur
+    :param coord: Coordonnées de la case
+    :return: Touché, Dans l'eau ou Coulé
+    """
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
     if not type_coordonnees(coord) :
@@ -179,8 +185,15 @@ def repondreTirJoueur(player:dict,coord:tuple)-> str :
     return res
 
 
-
-
+def estPerdantJoueur(player:dict) -> bool :
+    if not type_joueur(player):
+        raise ValueError(f"L'objet {player} ne correspond pas ")
+    perdu=True
+    lst_bat=player.get(const.JOUEUR_LISTE_BATEAUX)
+    for i in range(len(lst_bat)) :
+        if not estCouleBateau(lst_bat[i]) :
+            perdu=False
+    return perdu
 
 
 

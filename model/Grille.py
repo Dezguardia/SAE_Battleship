@@ -3,7 +3,6 @@
 from model.Constantes import *
 from model.Case import type_case
 from model.Coordonnees import type_coordonnees
-from view.BattleCanvas import *
 
 #
 # - Définition de la grille des tirs
