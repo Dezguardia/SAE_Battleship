@@ -187,6 +187,7 @@ def repondreTirJoueur(player:dict,coord:tuple)-> str :
     return res
 
 
+
 def estPerdantJoueur(player:dict) -> bool :
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
