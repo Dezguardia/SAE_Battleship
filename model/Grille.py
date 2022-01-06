@@ -2,7 +2,7 @@
 
 from model.Constantes import *
 from model.Case import type_case
-from model.Coordonnees import type_coordonnees
+from model.Coordonnees import type_coordonnees, sontVoisins
 
 #
 # - Définition de la grille des tirs
@@ -64,9 +64,15 @@ def marquerCouleGrille(grid:list,coord:tuple) -> None :
         del lst[0]
         x = case[0]
         y = case[1]
-        grid[x][1] = const.COULE
+        grid[x][y] = const.COULE
 
-        lst_vois=[(x,y+1),(x,y-1),(x+1,y),(x-1,y)]
+        lst_vois=[]
+        for i in range(len(grid)) :
+            row=grid[i]
+            for j in range(len(row)) :
+                coord=(i,j)
+                if sontVoisins(coord,case) :
+                    lst_vois.append(coord)
 
         for i in range(len(lst_vois)) :
             case2=lst_vois[i]

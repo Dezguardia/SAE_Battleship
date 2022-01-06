@@ -18,7 +18,7 @@ from model.Bateau import getSegmentsBateau, estPlaceBateau, est_horizontal_batea
 
 
 class BattleCanvas:
-    def __init__(self, title: str = "BattleShip", logo: str = "Images/logo_64.png"):
+    def __init__(self, title: str = "Battleship 64", logo: str = "Images/logo_64.png"):
         """
         Initialisation de la fenêtre de BattleShip
 
@@ -66,7 +66,7 @@ class BattleCanvas:
         self._load_images()
         # Definition des couleurs par défaut des phrases
         # Nom du joueur : Bleu
-        self.player_color = pygame.Color(22, 30, 255)
+        self.player_color = pygame.Color(0, 0, 0)
         # Rendu de la chaîne de caractères du joueur
         self.player_surface = None
         # Problème ou remarques : Rouge
@@ -74,7 +74,7 @@ class BattleCanvas:
         # Rendu de la chaîne de caractères des remarques
         self.remark_surface = None
         # Action à faire : Vert
-        self.action_color = pygame.Color(106, 255, 76)
+        self.action_color = pygame.Color(22, 30, 255)
         # Rendu de la chaîne de caractères des actions
         self.action_surface = None
 
@@ -90,7 +90,7 @@ class BattleCanvas:
 
         :return: Rien
         """
-        self.screen.fill(pygame.Color(124, 172, 255))
+        self.screen.fill(pygame.Color(250, 229, 224))
         self.dessine_fonts()
         self.dessine_grille(1)
         self.dessine_grille(2)
