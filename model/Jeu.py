@@ -74,8 +74,6 @@ def jouerJeu(player1:dict,player2:dict) -> None :
     else :
         winner=play
     win_name=winner.get(const.JOUEUR_NOM)
-    window.display_message(f"{play.get(const.JOUEUR_GRILLE_TIRS)}")
-    window.display_message(f"{play.get(const.JOUEUR_GRILLE_ADVERSAIRE)}")
     window.display_message(f"Le gagnant est {win_name}")
 
 def getListeBateaux() -> list :
