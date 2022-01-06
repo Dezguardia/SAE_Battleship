@@ -184,6 +184,10 @@ def repondreTirJoueur(player:dict,coord:tuple)-> str :
     if res == const.COULE :
         gridadv=player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
         marquerCouleGrille(gridadv,coord)
+    elif res == const.RATE :
+        gridadv=player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
+        gridadv[coord[0]][coord[1]] = const.RATE
+
     return res
 
 
