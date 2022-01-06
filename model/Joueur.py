@@ -1,9 +1,10 @@
 # Joueur.py
 
 from model.Bateau import *
-from model.Grille import type_grille, construireGrille
+from model.Grille import type_grille, construireGrille, marquerCouleGrille
 from model.Coordonnees import type_coordonnees
 from model.Constantes import *
+from view.BattleCanvas import *
 
 #
 # Un joueur est représenté par un dictionnaire contenant les couples (clé, valeur) suivants :
@@ -154,6 +155,7 @@ def reinitialiserBateauxJoueur(player:dict) -> None :
 
 #---------------------------------------------#
 
+
 def repondreTirJoueur(player:dict,coord:tuple)-> str :
     if not type_joueur(player):
         raise ValueError(f"L'objet {player} ne correspond pas ")
@@ -171,6 +173,9 @@ def repondreTirJoueur(player:dict,coord:tuple)-> str :
                 setEtatSegmentBateau(bateau,coord,const.TOUCHE)
                 if estCouleBateau(bateau) :
                     res = const.COULE
+    if res == const.COULE :
+        gridadv=player.get(const.JOUEUR_GRILLE_ADVERSAIRE)
+        marquerCouleGrille(gridadv,coord)
     return res
 
 

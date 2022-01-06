@@ -11,12 +11,19 @@ from model.Joueur import construireJoueur, repondreTirJoueur
 from model.Manuel import *
 
 def main_test():
+
     j = construireJoueur("Test", [const.PORTE_AVION, const.CUIRASSE, const.CROISEUR, const.TORPILLEUR])
     # j = construireJoueur("Test", [const.PORTE_AVION, const.CUIRASSE])
+
     placerBateauManuel(j)
-    case=choisirCaseTirManuel(j)
-    repondreTirJoueur(j,case)
-    window.refresh()
+
+    res=""
+    while res != const.COULE :
+        case=choisirCaseTirManuel(j)
+        res=repondreTirJoueur(j,case)
+        window.display_message(f"{res}")
+        window.refresh()
+
     window.set_action("Pour terminer, cliquez dans la grille de DROITE")
     window.get_clicked_cell(2)
 
