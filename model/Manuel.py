@@ -62,7 +62,7 @@ def construireActeurManuel(player:dict) -> dict :
     if not type_joueur(player) :
         raise ValueError(f"Le joueur {player} n'est pas valide.")
     acteur = { const.ACTEUR : player,
-               const.ACTEUR_PLACER_BATEAU : placerBateauManuel(),
-               const.ACTEUR_CHOISIR_CASE : choisirCaseTirManuel(),
-               const.ACTEUR_TRAITER_RESULTAT: traiterResultatTirManuel()}
+               const.ACTEUR_PLACER_BATEAU : placerBateauManuel(player),
+               const.ACTEUR_CHOISIR_CASE : choisirCaseTirManuel(player),
+               const.ACTEUR_TRAITER_RESULTAT: traiterResultatTirManuel(player)}
     return acteur

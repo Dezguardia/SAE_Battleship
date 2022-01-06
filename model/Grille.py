@@ -48,10 +48,11 @@ def construireGrille() -> list :
 
 def marquerCouleGrille(grid:list,coord:tuple) -> None :
     """
-    A FINIR
-    :param grid:
-    :param coord:
-    :return:
+    Marque une cases comme coulé dans une grille passée en paramètre, ainsi que ses cases voisines si
+    elles ont l'état touché
+    :param grid: Grille à affecter
+    :param coord: Tuple des coordonnées à marquer comme coulée
+    :return: None
     """
     if not type_grille(grid) :
         raise ValueError(f"Le paramètre {grid} ne correspond pas à une grille.")
