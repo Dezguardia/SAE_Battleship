@@ -22,8 +22,8 @@ def main_test():
         case=choisirCaseTirManuel(j)
         res=repondreTirJoueur(j,case)
         window.display_message(f"{res}")
+        traiterResultatTirManuel(j,case,res)
         window.refresh()
-
     window.set_action("Pour terminer, cliquez dans la grille de DROITE")
     window.get_clicked_cell(2)
 

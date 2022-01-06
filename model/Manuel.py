@@ -1,6 +1,9 @@
 # model/Manuel.py
 #
 from model.Joueur import getNomJoueur, type_joueur
+from model.Grille import marquerCouleGrille
+from model.Coordonnees import type_coordonnees
+from model.Constantes import *
 
 from view import window
 
@@ -18,6 +21,11 @@ def placerBateauManuel(player:dict) -> None :
     window.placer_bateaux()
 
 def choisirCaseTirManuel(player:dict) -> tuple :
+    """
+    Fait choisir une case au joueur et retourne ses coordonnées
+    :param player: Dictionnaire représentant le joueur
+    :return: Un tuple correspondant aux coordonnées de la case choisie par le joueur
+    """
 
     if not type_joueur(player) :
         raise ValueError(f"Le joueur {player} n'est pas valide.")
@@ -35,3 +43,17 @@ def choisirCaseTirManuel(player:dict) -> tuple :
     #-------#
     return cell
 
+
+def traiterResultatTirManuel(player:dict,coord:tuple,rep:str) -> None :
+    if not type_joueur(player) :
+        raise ValueError(f"Le joueur {player} n'est pas valide.")
+    if not type_coordonnees :
+        raise ValueError(f"Le paramètre {coord} ne correspond pas à des coordonnées valides.")
+    if type(rep) != str :
+        raise ValueError(f"Le paramètre {rep} ne correspond pas à une chaîne de caractères.")
+    grid=player.get(const.JOUEUR_GRILLE_TIRS)
+    x=coord[0]
+    y=coord[1]
+    grid[x][y] = rep
+    if rep == const.COULE :
+        marquerCouleGrille(grid,coord)
