@@ -1,4 +1,4 @@
-# Bataille Navale
+# Bataille Navale : Projet BUT Info 1ère année
 
 Le projet est écrit en Python avec le package _PyGame_.
 
